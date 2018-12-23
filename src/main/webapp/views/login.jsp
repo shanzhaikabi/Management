@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>注册页面</title>
+    <title>登陆页面</title>
 
     <meta name="description" content="User login page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -29,32 +29,18 @@
         </h4>
         <div class="space-6"></div>
         <%--${pageContext.request.contextPath }--%>
-        <form action="${pageContext.request.contextPath}/register.do" method="POST">
+        <form action="${pageContext.request.contextPath}/login.do" method="POST">
             <fieldset>
                 <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    用户名<input type="text" name="userid" class="form-control" placeholder="用户名" />
-                                </span>
-                </label>
-                <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    昵称<input type="text" name="name" class="form-control" placeholder="昵称" />
-                                </span>
-                </label>
-                <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    密码<input type="password" name="password" class="form-control" placeholder="密码" />
-                                </span>
-                </label>
-                <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    邮箱<input type="text" name="email" class="form-control" placeholder="邮箱" />
-                                </span>
-                </label>
-                <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    手机号<input type="text" name="tel" class="form-control" placeholder="手机号" />
-                                </span>
+                    <span class="block input-icon input-icon-right">
+                        用户名<input type="text" name="userid" class="form-control" placeholder="用户名" value="${userName}"/>
+                    </span>
+                    <span class="block input-icon input-icon-right">
+                        密码<input type="password" name="password" class="form-control" placeholder="密码" value="${userPass}" />
+                    </span>
+                    <tr>
+                        <td  colspan="2" align="center"><input type="checkbox" checked="checked" name="isUseCookie" />记住登陆</td>
+                    </tr>
                 </label>
                 <div class="space"></div>
                 <div class="clearfix" style="text-align: center;">

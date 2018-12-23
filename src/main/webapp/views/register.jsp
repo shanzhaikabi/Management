@@ -25,7 +25,7 @@
     <div class="widget-main">
         <h4 class="header blue lighter bigger">
             <i class="ace-icon fa fa-coffee green"></i>
-            请输入您的信息
+            ${failReason}
         </h4>
         <div class="space-6"></div>
         <%--${pageContext.request.contextPath }--%>
