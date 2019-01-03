@@ -24,17 +24,17 @@
             <fieldset>
                 <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    昵称<input type="text" name="name" class="form-control" placeholder="昵称">${user.name}</span>
+                                    昵称<input type="text" name="name" class="form-control" value="${user.name}"/>
                                 </span><br>
                 </label>
                 <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    邮箱<input type="text" name="email" class="form-control" placeholder="邮箱">${user.email}</span>
+                                    邮箱<input type="text" name="email" class="form-control" value="${user.email}"/>
                                 </span><br>
                 </label>
                 <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
-                                    手机号<input type="text" name="tel" class="form-control" placeholder="手机号">${user.tel}</span>
+                                    手机号<input type="text" name="tel" class="form-control" value="${user.tel}"/>
                                 </span><br>
                 </label>
                 <div class="space"></div>

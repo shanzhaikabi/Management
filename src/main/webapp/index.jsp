@@ -23,7 +23,7 @@
         </label>
         <input type="submit" value="前往" style="width:100px;">
     </form>
-    <form action="${pageContext.request.contextPath}/edit" method="GET">
+    <form action="${pageContext.request.contextPath}/edituser" method="GET">
         <label class="block clearfix">
             修改信息
         </label>

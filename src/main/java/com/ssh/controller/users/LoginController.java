@@ -13,14 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Controller
 public class LoginController {
     @Autowired
     private UserService userService;
+
     @RequestMapping(value = "/login.do",method = RequestMethod.POST)
-    public ModelAndView login(HttpServletResponse httpServletResponse, User user, String isUseCookie){
+    public ModelAndView login(HttpServletResponse httpServletResponse, HttpSession session, User user, String isUseCookie){
         if (null == isUseCookie){
             httpServletResponse.addCookie(new Cookie("username",null));
             httpServletResponse.addCookie(new Cookie("password",null));
@@ -37,10 +39,13 @@ public class LoginController {
                 httpServletResponse.addCookie(new Cookie("username",user.getUserid()));
                 httpServletResponse.addCookie(new Cookie("password",password));
             }
+            session.setAttribute("user",user);
         }
         else{
             httpServletResponse.addCookie(new Cookie("password",null));
             httpServletResponse.addCookie(new Cookie("username",null));
+            map.put("failReason","登陆失败,请检查账号或密码");
+            return new ModelAndView("login",map);
         }
         return new ModelAndView("mainPage");
     }
@@ -51,6 +56,6 @@ public class LoginController {
         user.setUserid(userName);
         user.setPassword(password);
         map.put("user",user);
-        return new ModelAndView("forward:login.do",map);
+        return new ModelAndView("login",map);
     }
 }

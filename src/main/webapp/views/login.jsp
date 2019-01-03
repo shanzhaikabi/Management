@@ -46,7 +46,7 @@
                 <div class="clearfix" style="text-align: center;">
                     <input type="submit" value="提交" style="width:100px;">
                 </div>
-                <a href="/register">注册</a>
+                <a href="register">注册</a>
                 <div class="space-4"></div>
             </fieldset>
         </form>

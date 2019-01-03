@@ -13,7 +13,7 @@
 <body>
 <center>
     <h2 style="color: #ff261a;">this is my test page!</h2>
-    <h2 style="color: #ff261a;">你的用户id:${user.email}</h2>
+    <h2 style="color: #ff261a;">你的用户id:${user.userid}</h2>
 </center>
 </body>
 </html>

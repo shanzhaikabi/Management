@@ -6,23 +6,21 @@ import com.ssh.utils.OtherUtils;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
 public class UserService{
     @Autowired
     private UserRepository userRepository;
 
     public String register(User user) {
         List ret = new ArrayList<>();
-        if (null != user.getEmail() && userRepository.findList("email",user.getEmail())){
+        if (null != user.getEmail() && user.getEmail().length() > 0 && userRepository.findList("email",user.getEmail())){
             return "注册失败！邮箱已被注册";
         }
-        if (null != user.getTel() && userRepository.findList("tel",user.getTel())){
+        if (null != user.getTel() && user.getTel().length() > 0 && userRepository.findList("tel",user.getTel())){
             return "注册失败！手机号已被注册";
         }
         try {
@@ -50,6 +48,12 @@ public class UserService{
         return "success";
     }
 
+    /**
+     *
+     * @param user
+     * @param target
+     * @return 把user的信息变更给target
+     */
     public String editUser(User user,User target){
         if (null != user.getEmail() && userRepository.findList("email",user.getEmail())){
             return "修改失败！邮箱已被注册";
@@ -58,6 +62,7 @@ public class UserService{
             return "修改失败！手机号已被注册";
         }
         OtherUtils.convertBean2Bean(user,target);
+        userRepository.saveOrUpdate(target);
         return "修改成功";
     }
 

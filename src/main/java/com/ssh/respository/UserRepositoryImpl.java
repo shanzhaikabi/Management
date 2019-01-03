@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserRepositoryImpl implements UserRepository{
 
     @Autowired
@@ -29,7 +30,7 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     public boolean findList(String type,String con){
-        List<User> list = getCurrentSession().createCriteria(User.class).add(Restrictions.eq("type",con)).list();
+        List<User> list = getCurrentSession().createCriteria(User.class).add(Restrictions.eq(type,con)).list();
         return list.size() > 0;
     }
 
@@ -37,22 +38,18 @@ public class UserRepositoryImpl implements UserRepository{
         return null;
     }
 
-    @Transactional
     public void persist(User entity) {
         getCurrentSession().persist(entity);
     }
 
-    @Transactional
     public String save(User entity) {
         return (String) getCurrentSession().save(entity);
     }
 
-    @Transactional
     public void saveOrUpdate(User entity) {
         getCurrentSession().saveOrUpdate(entity);
     }
 
-    @Transactional
     public void delete(String id) {
         User user = load(id);
         getCurrentSession().delete(user);

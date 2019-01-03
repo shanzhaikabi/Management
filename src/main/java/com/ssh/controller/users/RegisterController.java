@@ -21,11 +21,11 @@ public class RegisterController {
     @RequestMapping(value = "/register.do",method = RequestMethod.POST)
     public ModelAndView register(User user, HttpSession session) {
         ModelMap map=new ModelMap();
-        if (null == user.getUserid()){
+        if (null == user.getUserid() || user.getUserid().length() == 0){
             map.put("failReason","注册失败！用户名为空");
             return new ModelAndView("forward:register",map);
         }
-        if (null == user.getName()){
+        if (null == user.getName() || user.getName().length() == 0){
             map.put("failReason","注册失败！昵称为空");
             return new ModelAndView("forward:register",map);
         }

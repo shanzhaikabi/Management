@@ -2,7 +2,6 @@ package com.ssh.controller.users;
 
 import com.ssh.entity.User;
 import com.ssh.service.UserService;
-import com.ssh.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,25 +23,29 @@ public class EditUserController {
         if (null == username){//修改自己的信息
             target = (User) session.getAttribute("user");
             if (null == target){//登陆失效
-                return new ModelAndView("redirect:login");
+                return new ModelAndView("login");
             }
         }
         else{
             target = userService.getUserById(username);
             if (null == target){//登陆失效
                 //TODO 返回管理端
-                return new ModelAndView("redirect:login");
+                return new ModelAndView("login");
             }
         }
         ModelMap map = new ModelMap();
         String ret = userService.editUser(user,target);
-        session.setAttribute("user",user);
+        session.setAttribute("user",target);
         map.put("result",ret);
         return new ModelAndView("forward:edituser",map);
     }
 
-    @RequestMapping(value = "edituser",method = RequestMethod.POST)
-    ModelAndView editUser(User user){
+    @RequestMapping(value = "edituser",method = {RequestMethod.GET,RequestMethod.POST})
+    ModelAndView editUser(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if (null == user){//登陆失效
+            return new ModelAndView("login");
+        }
         ModelMap map = new ModelMap();
         map.put("user",user);
         return new ModelAndView("editUser",map);
