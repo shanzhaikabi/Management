@@ -34,27 +34,27 @@
                 <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
                                     用户名<input type="text" name="userid" class="form-control" placeholder="用户名" />
-                                </span>
+                                </span><br>
                 </label>
                 <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
                                     昵称<input type="text" name="name" class="form-control" placeholder="昵称" />
-                                </span>
+                                </span><br>
                 </label>
                 <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
                                     密码<input type="password" name="password" class="form-control" placeholder="密码" />
-                                </span>
+                                </span><br>
                 </label>
                 <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
                                     邮箱<input type="text" name="email" class="form-control" placeholder="邮箱" />
-                                </span>
+                                </span><br>
                 </label>
                 <label class="block clearfix">
                                 <span class="block input-icon input-icon-right">
                                     手机号<input type="text" name="tel" class="form-control" placeholder="手机号" />
-                                </span>
+                                </span><br>
                 </label>
                 <div class="space"></div>
                 <div class="clearfix" style="text-align: center;">

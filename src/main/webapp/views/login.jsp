@@ -34,10 +34,10 @@
                 <label class="block clearfix">
                     <span class="block input-icon input-icon-right">
                         用户名<input type="text" name="userid" class="form-control" placeholder="用户名" value="${userName}"/>
-                    </span>
+                    </span><br>
                     <span class="block input-icon input-icon-right">
                         密码<input type="password" name="password" class="form-control" placeholder="密码" value="${userPass}" />
-                    </span>
+                    </span><br>
                     <tr>
                         <td  colspan="2" align="center"><input type="checkbox" checked="checked" name="isUseCookie" />记住登陆</td>
                     </tr>
@@ -46,6 +46,7 @@
                 <div class="clearfix" style="text-align: center;">
                     <input type="submit" value="提交" style="width:100px;">
                 </div>
+                <a href="/register">注册</a>
                 <div class="space-4"></div>
             </fieldset>
         </form>

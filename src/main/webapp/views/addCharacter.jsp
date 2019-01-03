@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8" />
-    <title>注册页面</title>
+    <title>添加角色</title>
 
     <meta name="description" content="User login page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -24,37 +24,18 @@
 <div class="widget-body" style="width:500px;margin-left: 33%;">
     <div class="widget-main">
         <h4 class="header blue lighter bigger">
-            <i class="ace-icon fa fa-coffee red"></i>
+            <i class="ace-icon fa fa-coffee green"></i>
             ${failReason}
         </h4>
         <div class="space-6"></div>
         <%--${pageContext.request.contextPath }--%>
-        <form action="${pageContext.request.contextPath}/register.do" method="POST">
+        <% if(session.getAttribute("failReason") == "success"){%>
+        <form action="${pageContext.request.contextPath}/addCharacter.do" method="POST">
             <fieldset>
                 <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    用户名<input type="text" name="userid" class="form-control" placeholder="用户名" />
-                                </span>
-                </label>
-                <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    昵称<input type="text" name="name" class="form-control" placeholder="昵称" />
-                                </span>
-                </label>
-                <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    密码<input type="password" name="password" class="form-control" placeholder="密码" />
-                                </span>
-                </label>
-                <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    邮箱<input type="text" name="email" class="form-control" placeholder="邮箱" />
-                                </span>
-                </label>
-                <label class="block clearfix">
-                                <span class="block input-icon input-icon-right">
-                                    手机号<input type="text" name="tel" class="form-control" placeholder="手机号" />
-                                </span>
+                    <span class="block input-icon input-icon-right">
+                        角色名<input type="text" name="userid" class="form-control" placeholder="用户名" value="${userName}"/>
+                    </span>
                 </label>
                 <div class="space"></div>
                 <div class="clearfix" style="text-align: center;">
@@ -63,6 +44,7 @@
                 <div class="space-4"></div>
             </fieldset>
         </form>
+    <% }%>
     </div>
 </div>
 </body>

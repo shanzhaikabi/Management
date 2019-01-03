@@ -23,5 +23,11 @@
         </label>
         <input type="submit" value="前往" style="width:100px;">
     </form>
+    <form action="${pageContext.request.contextPath}/edit" method="GET">
+        <label class="block clearfix">
+            修改信息
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
 </body>
 </html>

@@ -20,3 +20,17 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+/out/
+/.idea/
+
+out/artifacts/Management_Web_exploded/views/registerFail.jsp
+out/artifacts/Management_Web_exploded/views/register.jsp
+out/artifacts/Management_Web_exploded/views/mainPage.jsp
+out/artifacts/Management_Web_exploded/index.jsp
+.idea/workspace.xml
+.DS_Store
+.idea/workspace.xml
+.idea/workspace.xml
+out/artifacts/Management_Web_exploded/index.jsp
+out/artifacts/Management_Web_exploded/views/mainPage.jsp

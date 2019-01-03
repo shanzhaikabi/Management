@@ -1,7 +1,8 @@
-package com.ssh.controller;
+package com.ssh.controller.users;
 
 import com.ssh.entity.User;
-import com.ssh.service.UserServiceImpl;
+import com.ssh.service.UserService;
+import com.ssh.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -17,35 +18,39 @@ import java.io.IOException;
 @Controller
 public class LoginController {
     @Autowired
-    private UserServiceImpl userService;
-
+    private UserService userService;
     @RequestMapping(value = "/login.do",method = RequestMethod.POST)
     public ModelAndView login(HttpServletResponse httpServletResponse, User user, String isUseCookie){
-        if (null == isUseCookie || isUseCookie.length() == 0){
+        if (null == isUseCookie){
             httpServletResponse.addCookie(new Cookie("username",null));
             httpServletResponse.addCookie(new Cookie("password",null));
         }
         String password = user.getPassword();
-        ModelAndView ret = userService.login(user);
-        if (ret.getViewName().equals("mainPage")){//登陆成功
+        user.setPassword(UserUtils.getSHA256StrJava(password));
+        ModelMap map = new ModelMap();
+        if (null == user.getUserid()){
+            map.put("failReason","登陆失败,请检查账号或密码");
+            return new ModelAndView("login",map);
+        }
+        if (userService.login(user).equals("success")){//登陆成功
             if (null != isUseCookie && isUseCookie.length() > 0){
                 httpServletResponse.addCookie(new Cookie("username",user.getUserid()));
                 httpServletResponse.addCookie(new Cookie("password",password));
             }
-            httpServletResponse.addCookie(new Cookie("userid",user.getUserid()));
         }
         else{
             httpServletResponse.addCookie(new Cookie("password",null));
-            httpServletResponse.addCookie(new Cookie("userid",null));
+            httpServletResponse.addCookie(new Cookie("username",null));
         }
-        return ret;
+        return new ModelAndView("mainPage");
     }
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView loginWhenHaveCookie(@CookieValue("username") String userName,@CookieValue("password") String password) throws IOException {
+    public ModelAndView loginWhenHaveCookie(@CookieValue(value = "username",defaultValue = "") String userName,@CookieValue(value = "password",defaultValue = "") String password) throws IOException {
         ModelMap map=new ModelMap();
-        map.put("userName",userName);
-        map.put("userPass",password);
-        return new ModelAndView("login",map);
+        User user = new User();
+        user.setUserid(userName);
+        user.setPassword(password);
+        map.put("user",user);
+        return new ModelAndView("forward:login.do",map);
     }
 }

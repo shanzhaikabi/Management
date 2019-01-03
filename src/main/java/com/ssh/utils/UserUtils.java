@@ -1,11 +1,14 @@
 package com.ssh.utils;
 
+import lombok.experimental.UtilityClass;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+@UtilityClass
 public class UserUtils{
-    public static String getSHA256StrJava(String str){
+    public String getSHA256StrJava(String str){
         MessageDigest messageDigest;
         String encodeStr = "";
         try {
@@ -19,7 +22,7 @@ public class UserUtils{
         }
         return encodeStr;
     }
-    private static String byte2Hex(byte[] bytes){
+    private String byte2Hex(byte[] bytes){
         StringBuffer stringBuffer = new StringBuffer();
         String temp = null;
         for (int i=0;i<bytes.length;i++){
@@ -31,5 +34,12 @@ public class UserUtils{
             stringBuffer.append(temp);
         }
         return stringBuffer.toString();
+    }
+
+    public boolean checkPassword(String password){
+        if (password.length() < 6 || password.length() > 24){
+            return true;
+        }
+        return false;
     }
 }
