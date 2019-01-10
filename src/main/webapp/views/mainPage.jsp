@@ -12,6 +12,7 @@
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/login" method="GET">
+    当前用户 : ${user.name}
     <form action="${pageContext.request.contextPath}/login" method="GET">
         <label class="block clearfix">
             登陆
@@ -39,6 +40,12 @@
     <form action="${pageContext.request.contextPath}/showuserlist" method="GET">
         <label class="block clearfix">
             修改用户
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
+    <form action="${pageContext.request.contextPath}/blue" method="GET">
+        <label class="block clearfix">
+            蓝钻专用
         </label>
         <input type="submit" value="前往" style="width:100px;">
     </form>

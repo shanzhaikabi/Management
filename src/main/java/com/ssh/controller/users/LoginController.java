@@ -58,4 +58,19 @@ public class LoginController {
         map.put("user",user);
         return new ModelAndView("login",map);
     }
+
+    @RequestMapping(value = "blue",method = {RequestMethod.POST,RequestMethod.GET})
+    public ModelAndView showIt(HttpSession session){
+        ModelMap map = new ModelMap();
+        User user = (User) session.getAttribute("user");
+        if (null == user){//登陆失效
+            return new ModelAndView("login");
+        }
+        if (userService.notHaveOperation(user,8)){
+            map.put("result","您没有此权限");
+            return new ModelAndView("mainPage",map);
+        }
+        map.put("result","蓝钻贵族专属权限");
+        return new ModelAndView("mainPage",map);
+    }
 }
