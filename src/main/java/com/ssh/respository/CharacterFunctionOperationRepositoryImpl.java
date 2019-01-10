@@ -1,7 +1,8 @@
 package com.ssh.respository;
 
-import com.ssh.entity.Character;
+import com.ssh.entity.Chara;
 import com.ssh.entity.CharacterFunctionOperation;
+import com.ssh.entity.Operation;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -9,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,12 +25,12 @@ public class CharacterFunctionOperationRepositoryImpl implements CharacterFuncti
     }
 
     @Override
-    public CharacterFunctionOperation load(Long id) {
+    public CharacterFunctionOperation load(Integer id) {
         return (CharacterFunctionOperation) getCurrentSession().load(CharacterFunctionOperation.class,id);
     }
 
     @Override
-    public CharacterFunctionOperation get(Long id) {
+    public CharacterFunctionOperation get(Integer id) {
         return (CharacterFunctionOperation) getCurrentSession().get(CharacterFunctionOperation.class,id);
     }
 
@@ -44,8 +45,8 @@ public class CharacterFunctionOperationRepositoryImpl implements CharacterFuncti
     }
 
     @Override
-    public Long save(CharacterFunctionOperation entity) {
-        return (Long) getCurrentSession().save(entity);
+    public Integer save(CharacterFunctionOperation entity) {
+        return (Integer) getCurrentSession().save(entity);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class CharacterFunctionOperationRepositoryImpl implements CharacterFuncti
         getCurrentSession().delete(entity);
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         getCurrentSession().delete(get(id));
     }
 
@@ -68,28 +69,49 @@ public class CharacterFunctionOperationRepositoryImpl implements CharacterFuncti
     }
 
     @Override
-    public List<Long> getOperationByCharacter(Character character) {
-        return (List<Long>) getCurrentSession().createQuery("where c.characterid = ?")
+    public List<Integer> getOperationIdByCharacter(Chara character) {
+        return (List<Integer>) getCurrentSession().createCriteria(CharacterFunctionOperation.class)
+                .add(Restrictions.eq("characterid",character.getCharacterid())).list()
+                .stream().map(object -> ((CharacterFunctionOperation)object).getOperationid())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Operation> getOperationByCharacter(Chara character) {
+        return (List<Operation>) getCurrentSession().createQuery("from Operation o,CharacterFunctionOperation c where c.characterid = ? and c.operationid = o.operationid")
                 .setParameter(0,character.getCharacterid()).list().stream()
                 .map(object -> ((Object[])object)[0]).collect(Collectors.toList());
     }
 
     @Override
-    public void saveOperationForCharacter(Character character, String[] operations) {
-        List<Long> operations_old = getOperationByCharacter(character);
-        List<Long> operations_new = Arrays.stream(operations).map(object -> Long.valueOf(object)).collect(Collectors.toList());
-        operations_new.removeIf(operation -> operations_old.contains(operation));
-        operations_old.forEach(operation -> delete(operation));
+    public void saveOperationForCharacter(Chara character, String[] operations) {
+        List<Integer> operations_old = getOperationIdByCharacter(character);
+        List<Integer> operations_new = new ArrayList<>();
+        for (String operation : operations) {
+            operations_new.add(Integer.valueOf(operation));
+        }
+        for (int i = 0;i < operations_new.size();i++) {
+            Integer integer = operations_new.get(i);
+            if (operations_old.contains(integer)) {
+                operations_old.remove(integer);
+                operations_new.remove(integer);
+            }
+        }
+        operations_old.forEach(operation -> {
+            if (operations != null) delete(operation);
+        });
         operations_new.forEach(id -> {
-            CharacterFunctionOperation tmp = new CharacterFunctionOperation();
-            tmp.setCharacterid(character.getCharacterid());
-            tmp.setOperationid(id.intValue());
-            save(tmp);
+            if (id != null){
+                CharacterFunctionOperation tmp = new CharacterFunctionOperation();
+                tmp.setCharacterid(character.getCharacterid());
+                tmp.setOperationid(id);
+                save(tmp);
+            }
         });
     }
 
     @Override
-    public boolean notHaveOperation(Character character, Long operationId) {
+    public boolean notHaveOperation(Chara character, Integer operationId) {
         return getCurrentSession().createCriteria(CharacterFunctionOperation.class)
                 .add(Restrictions.eq("characterid",character.getCharacterid()))
                 .add(Restrictions.eq("operationid",operationId)).list().isEmpty();

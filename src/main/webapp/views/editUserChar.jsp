@@ -29,20 +29,17 @@
         </h4>
         <div class="space-6"></div>
         <%--${pageContext.request.contextPath }--%>
-        <form action="${pageContext.request.contextPath}/editCharacter.do" method="POST">
+        <form action="${pageContext.request.contextPath}/edituserchar.do" method="POST">
             <fieldset>
                 <label class="block clearfix">
                     <span class="block input-icon input-icon-right">
-                        角色名<input type="text" name="name" class="form-control" placeholder="角色名" value="${character.getName()}"/>
+                        用户名 : ${user.getName()}
                     </span><br>
                 </label>
                 <span class="block input-icon input-icon-right">
-                    <input type="hidden" name="characterid" value="${character.getCharacterid()}"/>
+                    <input type="hidden" name="userid" value="${user.userid}"/>
                 </span>
-                <span class="block input-icon input-icon-right">
-                    <input type="hidden" name="isnew" value="${isnew}"/>
-                </span>
-                ${operationList}
+                ${charList}
                 <div class="space"></div>
                 <div class="clearfix" style="text-align: center;">
                     <input type="submit" value="提交" style="width:100px;">

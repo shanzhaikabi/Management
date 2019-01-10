@@ -19,6 +19,8 @@
             ${result}
         </h4>
         <div class="space-6"></div>
+        <input type = "hidden" name="target" value="${target}"/>
+        <input type = "hidden" name="userid" value="${user.userid}"/>
         <%--${pageContext.request.contextPath }--%>
         <form action="${pageContext.request.contextPath}/edituser.do" method="POST">
             <fieldset>

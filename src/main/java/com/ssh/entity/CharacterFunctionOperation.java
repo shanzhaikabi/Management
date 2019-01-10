@@ -8,11 +8,12 @@ import java.util.Objects;
 public class CharacterFunctionOperation {
     private int id;
     private int characterid;
-    private int functionid;
+    private Integer functionid;
     private int operationid;
 
     @Id
     @Column(name = "id", nullable = false)
+    @GeneratedValue
     public int getId() {
         return id;
     }
@@ -32,12 +33,12 @@ public class CharacterFunctionOperation {
     }
 
     @Basic
-    @Column(name = "functionid", nullable = false)
-    public int getFunctionid() {
+    @Column(name = "functionid", nullable = true)
+    public Integer getFunctionid() {
         return functionid;
     }
 
-    public void setFunctionid(int functionid) {
+    public void setFunctionid(Integer functionid) {
         this.functionid = functionid;
     }
 
@@ -58,8 +59,8 @@ public class CharacterFunctionOperation {
         CharacterFunctionOperation that = (CharacterFunctionOperation) o;
         return id == that.id &&
                 characterid == that.characterid &&
-                functionid == that.functionid &&
-                operationid == that.operationid;
+                operationid == that.operationid &&
+                Objects.equals(functionid, that.functionid);
     }
 
     @Override

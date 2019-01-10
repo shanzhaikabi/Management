@@ -43,11 +43,6 @@
                 <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
             </props>
         </property>
-        <property name="mappingLocations">
-            <list>
-                <value>classpath:com/ssh/entity/CharacterFunctionOperation.hbm.xml</value>
-            </list>
-        </property>
     </bean>
 
     <!-- 事物管理器配置  -->

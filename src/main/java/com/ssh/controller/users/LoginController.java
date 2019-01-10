@@ -21,7 +21,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login.do",method = RequestMethod.POST)
+    @RequestMapping(value = "login.do",method = RequestMethod.POST)
     public ModelAndView login(HttpServletResponse httpServletResponse, HttpSession session, User user, String isUseCookie){
         if (null == isUseCookie){
             httpServletResponse.addCookie(new Cookie("username",null));
@@ -49,7 +49,7 @@ public class LoginController {
         }
         return new ModelAndView("mainPage");
     }
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "login", method = RequestMethod.GET)
     public ModelAndView loginWhenHaveCookie(@CookieValue(value = "username",defaultValue = "") String userName,@CookieValue(value = "password",defaultValue = "") String password) throws IOException {
         ModelMap map=new ModelMap();
         User user = new User();

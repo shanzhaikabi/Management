@@ -18,7 +18,7 @@ public class RegisterController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/register.do",method = RequestMethod.POST)
+    @RequestMapping(value = "register.do",method = RequestMethod.POST)
     public ModelAndView register(User user, HttpSession session) {
         ModelMap map=new ModelMap();
         if (null == user.getUserid() || user.getUserid().length() == 0){
@@ -44,7 +44,7 @@ public class RegisterController {
         return new ModelAndView("forward:register",map);
     }
 
-    @RequestMapping(value = "/register",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "register",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView register() {
         return new ModelAndView("register");
     }

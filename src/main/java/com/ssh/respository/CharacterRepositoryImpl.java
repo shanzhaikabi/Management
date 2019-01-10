@@ -1,6 +1,7 @@
 package com.ssh.respository;
 
-import com.ssh.entity.Character;
+import com.ssh.entity.Chara;
+import com.ssh.entity.Operation;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,35 +21,35 @@ public class CharacterRepositoryImpl implements CharacterRepository{
         return this.sessionFactory.openSession();
     }
 
-    public Character load(Long id) {
-        return (Character) getCurrentSession().load(Character.class,id);
+    public Chara load(Integer id) {
+        return (Chara) getCurrentSession().load(Chara.class,id);
     }
 
-    public Character get(Long id) {
-        return (Character) getCurrentSession().get(Character.class,id);
+    public Chara get(Integer id) {
+        return (Chara) getCurrentSession().get(Chara.class,id);
     }
 
-    public List<Character> findAll() {
-        return getCurrentSession().createCriteria(Character.class).list();
+    public List<Chara> findAll() {
+        return getCurrentSession().createCriteria(Chara.class).list();
     }
 
-    @Transactional
-    public void persist(Character entity) {
+    public List<Operation> findAllOperation() {
+        return getCurrentSession().createCriteria(Operation.class).list();
+    }
+
+    public void persist(Chara entity) {
         getCurrentSession().persist(entity);
     }
 
-    @Transactional
-    public Long save(Character entity) {
-        return (Long)getCurrentSession().save(entity);
+    public Integer save(Chara entity) {
+        return (Integer)getCurrentSession().save(entity);
     }
 
-    @Transactional
-    public void saveOrUpdate(Character entity) {
+    public void saveOrUpdate(Chara entity) {
         getCurrentSession().saveOrUpdate(entity);
     }
 
-    @Transactional
-    public void delete(Character entity) {
+    public void delete(Chara entity) {
         getCurrentSession().delete(entity);
     }
 

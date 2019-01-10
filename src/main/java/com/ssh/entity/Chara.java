@@ -1,17 +1,15 @@
 package com.ssh.entity;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Character {
+public class Chara {
     private int characterid;
     private String name;
 
     @Id
     @Column(name = "characterid")
+    @GeneratedValue
     public int getCharacterid() {
         return characterid;
     }
@@ -35,7 +33,7 @@ public class Character {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Character character = (Character) o;
+        Chara character = (Chara) o;
 
         if (characterid != character.characterid) return false;
         if (name != null ? !name.equals(character.name) : character.name != null) return false;

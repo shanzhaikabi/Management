@@ -12,7 +12,7 @@
             <column name="characterid" sql-type="int(20)"/>
         </property>
         <property name="functionid">
-            <column name="functionid" sql-type="int(20)"/>
+            <column name="functionid" sql-type="int(20)" not-null="true"/>
         </property>
         <property name="operationid">
             <column name="operationid" sql-type="int(20)"/>

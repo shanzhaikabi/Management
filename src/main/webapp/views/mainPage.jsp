@@ -11,12 +11,40 @@
     <title>主页</title>
 </head>
 <body>
-<right>
-    <a href="edituser" >修改个人信息</a>
-</right>
+<form action="${pageContext.request.contextPath}/login" method="GET">
+    <form action="${pageContext.request.contextPath}/login" method="GET">
+        <label class="block clearfix">
+            登陆
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
+    <form action="${pageContext.request.contextPath}/edituser" method="GET">
+        <label class="block clearfix">
+            修改信息
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
+    <form action="${pageContext.request.contextPath}/addcharacter" method="GET">
+        <label class="block clearfix">
+            增加角色
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
+    <form action="${pageContext.request.contextPath}/showcharlist" method="GET">
+        <label class="block clearfix">
+            修改角色
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
+    <form action="${pageContext.request.contextPath}/showuserlist" method="GET">
+        <label class="block clearfix">
+            修改用户
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
+</form>
 <center>
-    <h2 style="color: #ff261a;">this is my test page!</h2>
-    <h2 style="color: #ff261a;">你的用户id:${user.userid}</h2>
+    ${result}
 </center>
 </body>
 </html>

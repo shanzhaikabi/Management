@@ -29,5 +29,23 @@
         </label>
         <input type="submit" value="前往" style="width:100px;">
     </form>
+    <form action="${pageContext.request.contextPath}/addcharacter" method="GET">
+        <label class="block clearfix">
+            增加角色
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
+    <form action="${pageContext.request.contextPath}/showcharlist" method="GET">
+        <label class="block clearfix">
+            修改角色
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
+    <form action="${pageContext.request.contextPath}/showuserlist" method="GET">
+        <label class="block clearfix">
+            修改用户
+        </label>
+        <input type="submit" value="前往" style="width:100px;">
+    </form>
 </body>
 </html>

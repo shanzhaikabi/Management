@@ -1,6 +1,5 @@
 package com.ssh.respository;
 
-import com.ssh.entity.Character;
 import com.ssh.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,7 +30,7 @@ public class UserRepositoryImpl implements UserRepository{
     }
 
     public List<User> findAll() {
-        return null;
+        return getCurrentSession().createCriteria(User.class).list();
     }
 
     public void persist(User entity) {
@@ -53,7 +52,6 @@ public class UserRepositoryImpl implements UserRepository{
     public void flush() {
         getCurrentSession().flush();
     }
-
 
     public boolean findList(String type,String con){
         List<User> list = getCurrentSession().createCriteria(User.class).add(Restrictions.eq(type,con)).list();

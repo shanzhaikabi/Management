@@ -5,6 +5,14 @@
 <hibernate-mapping>
 
     <class name="com.ssh.entity.UserCharacter" table="user_character" schema="mysys">
-        <id name="id" column="id"/>
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="userid">
+            <column name="userid" sql-type="varchar(40)"/>
+        </property>
+        <property name="characterid">
+            <column name="characterid" sql-type="int(20)"/>
+        </property>
     </class>
 </hibernate-mapping>

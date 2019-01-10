@@ -1,6 +1,10 @@
 package com.ssh.respository;
 
-import com.ssh.entity.Character;
+import com.ssh.entity.Chara;
+import com.ssh.entity.Operation;
 
-public interface CharacterRepository extends DomainRepository<Character,Long>{
+import java.util.List;
+
+public interface CharacterRepository extends DomainRepository<Chara,Integer>{
+    List<Operation> findAllOperation();
 }

@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.ssh.entity.Character" table="character" schema="mysys">
+    <class name="com.ssh.entity.Chara" table="character" schema="mysys">
         <id name="characterid" column="characterid"/>
         <property name="name" column="name"/>
     </class>

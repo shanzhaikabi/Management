@@ -18,35 +18,30 @@ public class EditUserController {
     UserService userService;
 
     @RequestMapping(value = "edituser.do",method = RequestMethod.POST)
-    ModelAndView editUserBySelf(HttpSession session, User user,String username){
-        User target;
-        if (null == username){//修改自己的信息
-            target = (User) session.getAttribute("user");
-            if (null == target){//登陆失效
-                return new ModelAndView("login");
-            }
-        }
-        else{
-            target = userService.getUserById(username);
-            if (null == target){//登陆失效
-                //TODO 返回管理端
-                return new ModelAndView("login");
-            }
-        }
+    ModelAndView editUserDoIt(HttpSession session, User user,String target){
         ModelMap map = new ModelMap();
-        String ret = userService.editUser(user,target);
-        session.setAttribute("user",target);
+        String ret = userService.editUser(user);
+        if (target == null)
+            session.setAttribute("user",user);
         map.put("result",ret);
         return new ModelAndView("forward:edituser",map);
     }
 
     @RequestMapping(value = "edituser",method = {RequestMethod.GET,RequestMethod.POST})
-    ModelAndView editUser(HttpSession session){
+    ModelAndView editUser(HttpSession session,String target){
+        ModelMap map = new ModelMap();
         User user = (User) session.getAttribute("user");
         if (null == user){//登陆失效
             return new ModelAndView("login");
         }
-        ModelMap map = new ModelMap();
+        if (target != null && !user.getUserid().equals(target)){
+            if (userService.notHaveOperation(user,6)){
+                map.put("result","您没有此权限");
+                return new ModelAndView("mainPage",map);
+            }
+            user = userService.getUserById(target);
+            map.put("target",target);
+        }
         map.put("user",user);
         return new ModelAndView("editUser",map);
     }
