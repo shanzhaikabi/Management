@@ -5,6 +5,17 @@
 <hibernate-mapping>
 
     <class name="com.ssh.entity.CharacterFunctionOperation" table="character_function_operation" schema="mysys">
-        <id name="id" column="id"/>
+        <id name="id">
+            <column name="id" sql-type="int(20)"/>
+        </id>
+        <property name="characterid">
+            <column name="characterid" sql-type="int(20)"/>
+        </property>
+        <property name="functionid">
+            <column name="functionid" sql-type="int(20)"/>
+        </property>
+        <property name="operationid">
+            <column name="operationid" sql-type="int(20)"/>
+        </property>
     </class>
 </hibernate-mapping>

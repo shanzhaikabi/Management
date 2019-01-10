@@ -11,6 +11,9 @@
     <title>主页</title>
 </head>
 <body>
+<right>
+    <a href="edituser" >修改个人信息</a>
+</right>
 <center>
     <h2 style="color: #ff261a;">this is my test page!</h2>
     <h2 style="color: #ff261a;">你的用户id:${user.userid}</h2>

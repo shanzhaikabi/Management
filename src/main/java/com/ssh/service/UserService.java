@@ -1,6 +1,9 @@
 package com.ssh.service;
 
+import com.ssh.entity.Character;
 import com.ssh.entity.User;
+import com.ssh.respository.CharacterFunctionOperationRepository;
+import com.ssh.respository.UserCharacterRepository;
 import com.ssh.respository.UserRepository;
 import com.ssh.utils.OtherUtils;
 import org.hibernate.HibernateException;
@@ -14,6 +17,10 @@ import java.util.List;
 public class UserService{
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserCharacterRepository userCharacterRepository;
+    @Autowired
+    private CharacterFunctionOperationRepository cfoRepository;
 
     public String register(User user) {
         List ret = new ArrayList<>();
@@ -49,7 +56,6 @@ public class UserService{
     }
 
     /**
-     *
      * @param user
      * @param target
      * @return 把user的信息变更给target
@@ -68,5 +74,19 @@ public class UserService{
 
     public User getUserById(String userid) {
         return userRepository.get(userid);
+    }
+
+    /**
+     *
+     * @param user
+     * @param operationId
+     * @return 用户是否没有权限
+     */
+    public boolean notHaveOperation(User user,int operationId){
+        List<Character> list = userCharacterRepository.getCharacters(user);
+        for (Character character : list) {
+            if (!cfoRepository.notHaveOperation(character,Long.valueOf(operationId))) return false;
+        }
+        return true;
     }
 }

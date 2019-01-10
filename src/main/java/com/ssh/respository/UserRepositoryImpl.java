@@ -1,5 +1,6 @@
 package com.ssh.respository;
 
+import com.ssh.entity.Character;
 import com.ssh.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,11 +30,6 @@ public class UserRepositoryImpl implements UserRepository{
         return (User)getCurrentSession().get(User.class,id);
     }
 
-    public boolean findList(String type,String con){
-        List<User> list = getCurrentSession().createCriteria(User.class).add(Restrictions.eq(type,con)).list();
-        return list.size() > 0;
-    }
-
     public List<User> findAll() {
         return null;
     }
@@ -50,12 +46,17 @@ public class UserRepositoryImpl implements UserRepository{
         getCurrentSession().saveOrUpdate(entity);
     }
 
-    public void delete(String id) {
-        User user = load(id);
-        getCurrentSession().delete(user);
+    public void delete(User entity) {
+        getCurrentSession().delete(entity);
     }
 
     public void flush() {
         getCurrentSession().flush();
+    }
+
+
+    public boolean findList(String type,String con){
+        List<User> list = getCurrentSession().createCriteria(User.class).add(Restrictions.eq(type,con)).list();
+        return list.size() > 0;
     }
 }

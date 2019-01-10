@@ -4,10 +4,13 @@ import com.ssh.entity.Character;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
+@Repository
+@Transactional
 public class CharacterRepositoryImpl implements CharacterRepository{
 
     @Autowired
@@ -26,7 +29,7 @@ public class CharacterRepositoryImpl implements CharacterRepository{
     }
 
     public List<Character> findAll() {
-        return null;
+        return getCurrentSession().createCriteria(Character.class).list();
     }
 
     @Transactional
@@ -45,8 +48,8 @@ public class CharacterRepositoryImpl implements CharacterRepository{
     }
 
     @Transactional
-    public void delete(Long id) {
-        getCurrentSession().delete(id);
+    public void delete(Character entity) {
+        getCurrentSession().delete(entity);
     }
 
     public void flush() {

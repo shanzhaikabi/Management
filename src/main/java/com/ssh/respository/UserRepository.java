@@ -1,5 +1,6 @@
 package com.ssh.respository;
 
+import com.ssh.entity.Character;
 import com.ssh.entity.User;
 import org.hibernate.Query;
 

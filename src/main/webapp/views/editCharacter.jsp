@@ -34,9 +34,10 @@
             <fieldset>
                 <label class="block clearfix">
                     <span class="block input-icon input-icon-right">
-                        角色名<input type="text" name="userid" class="form-control" placeholder="用户名" value="${userName}"/>
+                        角色名<input type="text" name="name" class="form-control" placeholder="角色名" value="${character.getName()}"/>
                     </span>
                 </label>
+                ${operationlist}
                 <div class="space"></div>
                 <div class="clearfix" style="text-align: center;">
                     <input type="submit" value="提交" style="width:100px;">
